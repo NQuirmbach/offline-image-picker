@@ -1,9 +1,11 @@
 // middleware/auth.global.js
 export default defineNuxtRouteMiddleware(async (to) => {
-  // Falls der Nutzer bereits auf der Login-Seite ist, brauchen wir nichts zu tun.
-  if (to.path === "/login") {
+  // Führt den Auth-Check nur im Client-Kontext aus
+  if (import.meta.server) {
     return;
   }
+
+  if (to.path === "/login") return;
 
   // Zugriff auf den injizierten Supabase-Client
   const { $supabase } = useNuxtApp();
@@ -14,6 +16,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const {
     data: { session },
   } = await $supabase.auth.getSession();
+
+  console.log("Session", session);
 
   // Wenn keine Session vorhanden ist, leite zur Login-Seite weiter
   if (!session) {

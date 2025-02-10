@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     viewer: true,
     // and more...
   },
+  ssr: false,
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
@@ -19,7 +20,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@vite-pwa/nuxt", "@nuxtjs/tailwindcss"],
+  modules: ["@vite-pwa/nuxt", "@nuxtjs/tailwindcss", "@pinia/nuxt"],
 
   pwa: {
     registerType: "prompt",
@@ -44,7 +45,7 @@ export default defineNuxtConfig({
     },
 
     devOptions: {
-      enabled: true,
+      enabled: false,
       suppressWarnings: true,
       navigateFallback: "/",
       navigateFallbackAllowlist: [/^\/$/],
