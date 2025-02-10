@@ -10,11 +10,11 @@ definePageMeta({
 const email = ref("");
 const password = ref("");
 
-const { login, error, session } = useAuthStore();
+const auth = useAuthStore();
 const router = useRouter();
 
 const handleLogin = async () => {
-  const success = await login(email.value, password.value);
+  const success = await auth.login(email.value, password.value);
 
   if (success) {
     router.push("/");
@@ -54,8 +54,8 @@ const handleLogin = async () => {
           </button>
         </div>
       </form>
-      <p v-if="error" class="mt-4 text-center text-red-600">
-        {{ error }}
+      <p v-if="auth.error" class="mt-4 text-center text-red-600">
+        {{ auth.error }}
       </p>
     </div>
   </div>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useAuthStore } from "~/stores/auth";
 
-const { session, logout } = useAuthStore();
+const auth = useAuthStore();
 
 async function handleLogout() {
-  await logout();
+  await auth.logout();
   navigateTo("login");
 }
 </script>
@@ -16,8 +16,8 @@ async function handleLogout() {
     >
       <h1 class="flex-1">Offline Image Picker</h1>
 
-      <div v-if="session" class="flex items-center space-x-4">
-        <small>{{ session.user.email }}</small>
+      <div v-if="auth.session" class="flex items-center space-x-4">
+        <small>{{ auth.session.user.email }}</small>
         <button @click="handleLogout">Logout</button>
       </div>
     </header>
