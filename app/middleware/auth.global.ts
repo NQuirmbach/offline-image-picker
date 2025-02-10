@@ -1,7 +1,7 @@
 // middleware/auth.global.js
 export default defineNuxtRouteMiddleware(async (to) => {
   // Falls der Nutzer bereits auf der Login-Seite ist, brauchen wir nichts zu tun.
-  if (to.path === "/login") {
+  if (to.path === "login") {
     return;
   }
 
