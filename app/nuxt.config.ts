@@ -9,9 +9,9 @@ export default defineNuxtConfig({
     // and more...
   },
   app: {
-    baseURL: isDev ? "/" : "/offline-image-picker/",
+    // baseURL: isDev ? "/" : "/offline-image-picker/",
   },
-  ssr: false,
+  // ssr: false,
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
@@ -26,21 +26,21 @@ export default defineNuxtConfig({
   },
 
   modules: ["@vite-pwa/nuxt", "@nuxtjs/tailwindcss", "@pinia/nuxt"],
-
   pwa: {
     registerType: "prompt",
-    injectRegister: false,
-
     pwaAssets: {
       disabled: false,
       config: true,
     },
-
     manifest: {
       name: "Offline Image Picker",
       short_name: "offline-image-picker",
       description: "Offline Image Picker APp",
       theme_color: "#778da9",
+      background_color: "#ffffff",
+      display: "standalone",
+      start_url: "/",
+      icons: [],
     },
 
     workbox: {
@@ -50,15 +50,13 @@ export default defineNuxtConfig({
     },
 
     devOptions: {
-      enabled: false,
+      enabled: true,
       suppressWarnings: true,
       navigateFallback: "/",
       navigateFallbackAllowlist: [/^\/$/],
       type: "module",
     },
-
     registerWebManifestInRouteRules: true,
-
     client: {
       installPrompt: true,
     },

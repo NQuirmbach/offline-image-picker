@@ -10,5 +10,4 @@
       <NuxtPage />
     </NuxtLayout>
   </div>
-
 </template>

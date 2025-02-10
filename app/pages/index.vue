@@ -13,18 +13,20 @@
 </template>
 
 <script setup lang="ts">
+const message = ref<string | null>(null);
 const { $pwa } = useNuxtApp();
 
-const message = ref<string | null>(null);
-
 async function handleInstall() {
+  message.value = null;
   const result = await $pwa?.install();
   message.value = result ? JSON.stringify(result) : "empty";
 }
 async function handleUpdateSW() {
+  message.value = null;
   await $pwa?.updateServiceWorker(true);
 }
 async function handleGetSWRegistration() {
+  message.value = null;
   const result = $pwa?.getSWRegistration();
   message.value = result ? JSON.stringify(result) : "empty";
 }
