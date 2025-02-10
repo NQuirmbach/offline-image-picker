@@ -1,0 +1,34 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # oder der Branch, von dem aus du deployen möchtest
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16" # oder eine andere gewünschte Node-Version
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: app
+
+      - name: Generate Static Site
+        run: npm run generate
+        working-directory: app
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Passe publish_dir an, falls du nicht den Standardordner "dist" verwendest:
+          publish_dir: ./app/dist
