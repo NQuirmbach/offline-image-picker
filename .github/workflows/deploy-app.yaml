@@ -55,7 +55,7 @@ jobs:
 
       - uses: bacongobbler/azure-blob-storage-upload@main
         with:
-          source_dir: ./app/dist
+          source_dir: app/dist
           container_name: $web
           connection_string: ${{ secrets.SA_CONNECTION_STRING }}
           # WARNING: this will overwrite existing blobs in your blob storage
