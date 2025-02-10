@@ -17,8 +17,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ">=20" # oder eine andere gewünschte Node-Version
-        env:
-          NODE_OPTIONS: --no-deprecation
 
       - name: Install Dependencies
         run: npm install
@@ -27,6 +25,9 @@ jobs:
       - name: Generate Static Site
         run: npm run generate
         working-directory: app
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
