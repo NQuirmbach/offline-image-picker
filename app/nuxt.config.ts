@@ -9,9 +9,9 @@ export default defineNuxtConfig({
     // and more...
   },
   app: {
-    // baseURL: isDev ? "/" : "/offline-image-picker/",
+    baseURL: isDev ? "/" : "/offline-image-picker/",
   },
-  // ssr: false,
+  ssr: false,
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
@@ -40,7 +40,18 @@ export default defineNuxtConfig({
       background_color: "#ffffff",
       display: "standalone",
       start_url: "/",
-      icons: [],
+      icons: [
+        {
+          src: "/icons/logo_192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: "/icons/logo_512.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+      ],
     },
 
     workbox: {
@@ -50,7 +61,7 @@ export default defineNuxtConfig({
     },
 
     devOptions: {
-      enabled: true,
+      enabled: false,
       suppressWarnings: true,
       navigateFallback: "/",
       navigateFallbackAllowlist: [/^\/$/],
