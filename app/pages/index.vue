@@ -22,7 +22,20 @@ async function handleGetSWRegistration() {
 <template>
   <div>
     <h2>PWA Info</h2>
-    <pre>{{ JSON.stringify($pwa, null, 2) }}</pre>
+    <div class="flex">
+      <span class="w-52">Is installed:</span><b>{{ $pwa?.isPWAInstalled }}</b>
+    </div>
+    <div class="flex">
+      <span class="w-52">Service worker activated:</span
+      ><b>{{ $pwa?.swActivated }}</b>
+    </div>
+    <div class="flex">
+      <span class="w-52">Show install prompt:</span
+      ><b>{{ $pwa?.showInstallPrompt }}</b>
+    </div>
+    <div class="flex">
+      <span class="w-52">Offline ready:</span><b>{{ $pwa?.offlineReady }}</b>
+    </div>
   </div>
 
   <div class="flex items-centers space-x-4 my-4">

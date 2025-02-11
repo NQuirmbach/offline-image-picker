@@ -29,10 +29,12 @@ export default defineNuxtConfig({
       routes: ["/"],
     },
   },
-
+  experimental: {
+    appManifest: true,
+  },
   modules: ["@vite-pwa/nuxt", "@nuxtjs/tailwindcss", "@pinia/nuxt"],
   pwa: {
-    registerType: "autoUpdate",
+    registerType: "prompt",
     pwaAssets: {
       disabled: false,
       config: true,
@@ -40,7 +42,7 @@ export default defineNuxtConfig({
     manifest: {
       name: "Offline Image Picker",
       short_name: "offline-image-picker",
-      description: "Offline Image Picker APp",
+      description: "Offline Image Picker App",
       theme_color: "#778da9",
       background_color: "#ffffff",
       display: "standalone",
@@ -72,7 +74,7 @@ export default defineNuxtConfig({
     },
 
     devOptions: {
-      enabled: false,
+      enabled: true,
       suppressWarnings: true,
       navigateFallback: "/",
       navigateFallbackAllowlist: [/^\/$/],
