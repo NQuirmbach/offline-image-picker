@@ -32,7 +32,7 @@ export default defineNuxtConfig({
 
   modules: ["@vite-pwa/nuxt", "@nuxtjs/tailwindcss", "@pinia/nuxt"],
   pwa: {
-    registerType: "prompt",
+    registerType: "autoUpdate",
     pwaAssets: {
       disabled: false,
       config: true,
@@ -45,7 +45,7 @@ export default defineNuxtConfig({
       background_color: "#ffffff",
       display: "standalone",
       start_url: "/",
-      id: "/",
+      id: "oip.nquirmbach.info",
       scope: "/",
       icons: [
         {
@@ -59,6 +59,10 @@ export default defineNuxtConfig({
           type: "image/png",
         },
       ],
+      screenshots: [],
+      categories: ["utilities"],
+      orientation: "natural",
+      dir: "ltr",
     },
 
     workbox: {
