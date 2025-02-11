@@ -8,7 +8,14 @@ export default defineNuxtConfig({
     viewer: true,
     // and more...
   },
-  app: {},
+  app: {
+    head: {
+      title: "Offline Image Picker",
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+    },
+  },
+  css: ["~/assets/css/main.css"],
   ssr: false,
   runtimeConfig: {
     public: {

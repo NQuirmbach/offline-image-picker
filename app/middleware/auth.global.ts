@@ -18,7 +18,5 @@ export default defineNuxtRouteMiddleware(async (to) => {
   } = await $supabase.auth.getSession();
 
   // Wenn keine Session vorhanden ist, leite zur Login-Seite weiter
-  if (!session) {
-    return navigateTo("/login");
-  }
+  if (!session) return navigateTo("/login");
 });

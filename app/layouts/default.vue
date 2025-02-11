@@ -17,7 +17,6 @@ async function handleLogout() {
       <h1 class="flex-1">Offline Image Picker</h1>
 
       <div v-if="auth.session" class="flex items-center space-x-4">
-        <small>{{ auth.session.user.email }}</small>
         <button @click="handleLogout">Logout</button>
       </div>
     </header>
