@@ -22,7 +22,7 @@ jobs:
           node-version: "20"
       - run: npm ci
         working-directory: app
-      - run: NUXT_APP_BASE_URL=/offline-image-picker/ npx nuxt build --preset github_pages
+      - run: npx nuxt build --preset github_pages
         working-directory: app
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}

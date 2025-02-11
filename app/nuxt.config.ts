@@ -8,9 +8,7 @@ export default defineNuxtConfig({
     viewer: true,
     // and more...
   },
-  app: {
-    // baseURL: isDev ? "/" : "/offline-image-picker/",
-  },
+  app: {},
   ssr: false,
   runtimeConfig: {
     public: {
