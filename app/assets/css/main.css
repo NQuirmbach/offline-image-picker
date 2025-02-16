@@ -1,7 +1,42 @@
-h2 {
-    @apply text-2xl font-bold;
+h1 {
+  @apply text-2xl font-bold;
 }
 
-button {
+h2 {
+  @apply text-xl font-bold;
+}
 
+.button {
+  @apply bg-[#778da9] text-white font-bold py-2 px-4 rounded;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: darken(#778da9, 10%);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  @apply border border-gray-300 rounded py-2 px-4 w-full;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  border-color: #778da9;
+  outline: none;
+}
+
+label {
+  @apply block text-gray-700 font-bold mb-2;
+}
+
+.form-group {
+  @apply mb-4;
 }

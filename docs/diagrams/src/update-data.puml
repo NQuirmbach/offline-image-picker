@@ -1,0 +1,28 @@
+@startuml Update-Data Flow
+|Synchronous|
+start
+:User modifies (create/update/delete) data;
+:Component calls DataHandler;
+
+if (Is online?) then (yes)
+  :Persist data via supabase;
+  if (Was successful) then (yes)
+  :Persist response in cache via Dexie;
+  endif
+else (no)
+  :Persinst data via Dexie;
+endif
+
+:Show response;
+stop
+
+|Asynchronous|
+start
+:User goes online;
+:(SW) Replace requests from queue;
+:SW-Messages Plugin react to replayed response;
+if (Was successful) then (yes)
+  :Persist response in cache via Dexie;
+endif
+stop
+@enduml

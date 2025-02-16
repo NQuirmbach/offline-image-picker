@@ -1,5 +1,7 @@
 <script setup lang="ts">
-//
+navigator.serviceWorker.addEventListener("message", (event) => {
+  console.log("Message received: ", event);
+});
 </script>
 
 <template>

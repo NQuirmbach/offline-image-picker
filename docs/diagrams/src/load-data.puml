@@ -1,0 +1,24 @@
+@startuml Load-Data Flow
+|Synchronous|
+start
+:User opens a page;
+:Component calls DataHandler;
+
+if (Is online?) then (yes)
+  :Load data via supabase;
+  :Save data in cache via Dexie;
+else (no)
+  :Load data via Dexie;
+endif
+
+:Show data;
+stop
+
+|Asynchronous|
+start
+:User goes online;
+:(SW) Replace requests from queue;
+:SW-Messages Plugin react to replayed response;
+:Save data in cache via Dexie;
+stop
+@enduml

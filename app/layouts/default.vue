@@ -12,9 +12,16 @@ async function handleLogout() {
 <template>
   <div class="min-h-screen flex flex-col">
     <header
-      class="bg-blue-600 text-white py-4 px-6 flex items-center justify-between"
+      class="bg-blue-600 text-white py-4 px-6 flex items-center justify-between space-x-8"
     >
-      <h1 class="flex-1">Offline Image Picker</h1>
+      <NuxtLink href="/">Offline Image Picker</NuxtLink>
+
+      <nav class="flex-1">
+        <ul class="flex space-x-4">
+          <li><NuxtLink href="/">Home</NuxtLink></li>
+          <li><NuxtLink href="/pwa-info">PWA Info</NuxtLink></li>
+        </ul>
+      </nav>
 
       <div v-if="auth.session" class="flex items-center space-x-4">
         <button @click="handleLogout">Logout</button>

@@ -1,4 +1,29 @@
-let isDev = process.env.NODE_ENV !== "production";
+import type { RuntimeCaching } from "workbox-build";
+
+const supabaseRestUrlPattern = new RegExp(
+  "^" +
+    process.env.SUPABASE_URL!.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") +
+    "/rest/.*"
+);
+const createSupabaseWorkboxCaching = (
+  method: "GET" | "POST" | "PUT" | "DELETE"
+): RuntimeCaching => ({
+  handler: "NetworkFirst",
+  urlPattern: supabaseRestUrlPattern,
+  method: method,
+  options: {
+    backgroundSync: {
+      name: `supabase-${method.toLocaleLowerCase()}-sync`,
+      options: {
+        maxRetentionTime: 24 * 60,
+      },
+    },
+    broadcastUpdate: {
+      channelName: "supabase",
+      options: {},
+    },
+  },
+});
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -71,6 +96,12 @@ export default defineNuxtConfig({
       globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
       cleanupOutdatedCaches: true,
       clientsClaim: true,
+      runtimeCaching: [
+        createSupabaseWorkboxCaching("GET"),
+        createSupabaseWorkboxCaching("POST"),
+        createSupabaseWorkboxCaching("PUT"),
+        createSupabaseWorkboxCaching("DELETE"),
+      ],
     },
 
     devOptions: {

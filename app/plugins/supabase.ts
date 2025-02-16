@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import type { Database } from "~/types/database.types";
 
 export default defineNuxtPlugin({
   name: "supabase",
@@ -7,7 +8,7 @@ export default defineNuxtPlugin({
     const supabaseUrl = config.public.supabaseUrl;
     const supabaseAnonKey = config.public.supabaseAnonKey;
 
-    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
 
     console.debug("Supabase client created");
 

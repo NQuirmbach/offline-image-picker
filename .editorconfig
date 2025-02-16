@@ -1,0 +1,25 @@
+# EditorConfig hilft dabei, konsistente Code-Stile in verschiedenen Editoren sicherzustellen.
+# Weitere Infos: https://EditorConfig.org
+
+# Diese Datei ist die oberste EditorConfig
+root = true
+
+# Globale Einstellungen für alle Dateien
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Standard-Einrückung (2 Leerzeichen) für Quellcode-Dateien
+[*.{js,jsx,ts,tsx,vue,css,scss,html,json}]
+indent_style = space
+indent_size = 2
+
+# Markdown-Dateien sollten das Whitespace-Trimming nicht erzwingen
+[*.md]
+trim_trailing_whitespace = false
+
+[*.puml]
+indent_style = space
+indent_size = 2

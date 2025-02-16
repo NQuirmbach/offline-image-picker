@@ -1,0 +1,10 @@
+version: "3"
+
+tasks:
+  start-supabase:
+    cmds:
+      - supabase start
+
+  generate-db-types:
+    cmds:
+      - npx supabase gen types typescript --local > app/types/database.types.ts

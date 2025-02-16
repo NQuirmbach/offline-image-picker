@@ -1,5 +1,9 @@
 {
   "recommendations": [
-    "vue.volar"
+    "vue.volar",
+    "jebbs.plantuml",
+    "gruntfuggly.triggertaskonsave",
+    "supabase.vscode-supabase-extension",
+    "editorconfig.editorconfig"
   ]
 }
