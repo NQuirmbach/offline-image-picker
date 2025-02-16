@@ -1,30 +1,5 @@
 import type { RuntimeCaching } from "workbox-build";
 
-const supabaseRestUrlPattern = new RegExp(
-  "^" +
-    process.env.SUPABASE_URL!.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") +
-    "/rest/.*"
-);
-const createSupabaseWorkboxCaching = (
-  method: "GET" | "POST" | "PUT" | "DELETE"
-): RuntimeCaching => ({
-  handler: "NetworkFirst",
-  urlPattern: supabaseRestUrlPattern,
-  method: method,
-  options: {
-    backgroundSync: {
-      name: `supabase-${method.toLocaleLowerCase()}-sync`,
-      options: {
-        maxRetentionTime: 24 * 60,
-      },
-    },
-    broadcastUpdate: {
-      channelName: "supabase",
-      options: {},
-    },
-  },
-});
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -58,50 +33,28 @@ export default defineNuxtConfig({
     appManifest: true,
   },
   modules: ["@vite-pwa/nuxt", "@nuxtjs/tailwindcss", "@pinia/nuxt"],
+
   pwa: {
+    strategies: "injectManifest",
+    srcDir: "service-worker",
+    filename: "sw.ts",
     registerType: "prompt",
+    injectRegister: false,
+
     pwaAssets: {
       disabled: false,
       config: true,
     },
+
     manifest: {
-      name: "Offline Image Picker",
-      short_name: "offline-image-picker",
-      description: "Offline Image Picker App",
-      theme_color: "#778da9",
-      background_color: "#ffffff",
-      display: "standalone",
-      start_url: "/",
-      id: "oip.nquirmbach.info",
-      scope: "/",
-      icons: [
-        {
-          src: "/icons/logo_192.png",
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          src: "/icons/logo_512.png",
-          sizes: "512x512",
-          type: "image/png",
-        },
-      ],
-      screenshots: [],
-      categories: ["utilities"],
-      orientation: "natural",
-      dir: "ltr",
+      name: "my-pwa-app",
+      short_name: "my-pwa-app",
+      description: "my-pwa-app",
+      theme_color: "#f4a261",
     },
 
-    workbox: {
+    injectManifest: {
       globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
-      cleanupOutdatedCaches: true,
-      clientsClaim: true,
-      runtimeCaching: [
-        createSupabaseWorkboxCaching("GET"),
-        createSupabaseWorkboxCaching("POST"),
-        createSupabaseWorkboxCaching("PUT"),
-        createSupabaseWorkboxCaching("DELETE"),
-      ],
     },
 
     devOptions: {
@@ -111,7 +64,9 @@ export default defineNuxtConfig({
       navigateFallbackAllowlist: [/^\/$/],
       type: "module",
     },
+
     registerWebManifestInRouteRules: true,
+
     client: {
       installPrompt: true,
     },

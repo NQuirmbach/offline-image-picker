@@ -7,13 +7,29 @@ type Project = Tables<"projects">;
 
 const projects = ref<Project[]>([]);
 const loading = ref(false);
+const config = useRuntimeConfig();
 
 async function deleteProject(id: string) {
-  const { error } = await $supabase.from("projects").delete().eq("id", id);
-  if (error) {
-    console.error(error);
-  } else {
-    projects.value = projects.value.filter((project) => project.id !== id);
+  const newValue = projects.value.filter((project) => project.id !== id);
+  const { status } = await $supabase.from("projects").delete().eq("id", id);
+
+  let updateValue = true;
+  switch (status) {
+    case 204:
+    case 0:
+      navigator.serviceWorker.controller?.postMessage({
+        type: "UPDATE_CACHE",
+        key: config.public.supabaseUrl + "/rest/v1/projects?select=*",
+        data: newValue,
+      });
+      break;
+    default:
+      updateValue = false;
+      break;
+  }
+
+  if (updateValue) {
+    projects.value = newValue;
   }
 }
 
